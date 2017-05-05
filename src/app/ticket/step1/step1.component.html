@@ -1,0 +1,61 @@
+<div class="step-cont step1">
+  <div class="step-main">
+    <form class="main-info info-center" autocomplete="off" novalidate [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="main-field">
+        <i class="material-icons">person</i>
+        <md-input-container *ngIf="myTipo=='business'">
+          <input mdInput type="text" placeholder="Firma" formControlName="firma">
+          <md-hint *ngIf="form.controls['firma'].touched || submitted">
+            <span *ngIf="form.controls['firma'].hasError('required')">Firma ist erforderlich</span>
+          </md-hint>
+        </md-input-container>
+        <div class="space" *ngIf="myTipo=='business'"></div>
+        <md-input-container>
+          <input mdInput type="text" placeholder="Name" formControlName="name">
+          <md-hint *ngIf="form.controls['name'].touched || submitted">
+            <span *ngIf="form.controls['name'].hasError('required')">Name ist erforderlich</span>
+          </md-hint>
+        </md-input-container>
+        <div class="space"></div>
+        <md-input-container>
+          <input mdInput type="text" placeholder="Vorname" formControlName="surname">
+          <md-hint *ngIf="form.controls['surname'].touched || submitted">
+            <span *ngIf="form.controls['surname'].hasError('required')">Nachname ist erforderlich</span>
+          </md-hint>
+        </md-input-container>
+      </div>
+      <div class="main-field">
+        <i class="material-icons">email</i>
+        <md-input-container>
+          <input mdInput type="email" placeholder="E-Mail" formControlName="email">
+          <md-hint *ngIf="form.controls['email'].touched || submitted">
+            <span *ngIf="form.controls['email'].hasError('required')">E-Mail ist erforderlich</span>
+            <span *ngIf="form.controls['email'].hasError('invalidEmail')">E-Mail ist ungültig</span>
+          </md-hint>
+        </md-input-container>
+        <div class="space"></div>
+        <md-input-container>
+          <input mdInput type="email" placeholder="E-Mail wiederholen" formControlName="remail">
+          <md-hint *ngIf="form.controls['remail'].touched || submitted">
+            <span *ngIf="form.controls['remail'].hasError('required')">E-Mail ist erforderlich</span>
+            <span *ngIf="!form.controls['remail'].hasError('required') && form.hasError('mismatchedPasswords')">Emails stimmen nicht überein</span>
+          </md-hint>
+        </md-input-container>
+      </div>
+      <div class="main-field">
+        <i class="material-icons">comment</i>
+        <md-input-container>
+          <textarea mdInput placeholder="Nachricht" rows="4" formControlName="comment"></textarea>
+        </md-input-container>
+      </div>
+      <div class="main-field">
+          <md-checkbox formControlName="agree" [class.error]="submitted && form.controls['agree'].hasError('required')">
+            Hiermit akzeptiere ich die <a href="/agb" target="_blank">AGB</a> und die Bestimmungen zum <a href="/datenschutz" target="_blank">Datenschutz</a>. Die weitere Kommunikation erfolgt per E-Mail.
+            <!--<md-hint *ngIf="form.controls['agree'].touched || submitted">
+              <span *ngIf="form.controls['agree'].hasError('required')">Agree is required</span>
+            </md-hint>-->
+          </md-checkbox>
+      </div>
+    </form>
+  </div>    
+</div>

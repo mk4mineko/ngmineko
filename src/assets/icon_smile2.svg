@@ -1,0 +1,7 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  
+  <style type="text/css">
+    path,circle{fill:#70b42b;}
+  </style>
+  
+  <path d="M12,17.56a5.5,5.5,0,0,0,5.11-3.5A11.59,11.59,0,0,1,12,15.4a12.28,12.28,0,0,1-5.11-1.33A5.5,5.5,0,0,0,12,17.56Z"/><path d="M12,22A10,10,0,1,0,2,12,10,10,0,0,0,12,22ZM12,4a8,8,0,1,1-8,8A8,8,0,0,1,12,4Z"/><circle cx="15.5" cy="9.5" r="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/></svg>

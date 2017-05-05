@@ -1,0 +1,306 @@
+<div class="ticket">
+<div class="main-menu">
+  <div class="menu-cont">
+    <div class="menu-left"><img src="assets/logo_mineko.svg" alt="logo_mineko" routerLink="/"></div>
+    <div class="menu-space"></div>
+    <div class="menu-right">
+        <span>Bekannt aus : </span>
+        <img src="assets/press_drund.png" alt="press_drund">
+        <img src="assets/press_focus.png" alt="press_focus">
+        <img src="assets/press_faznet.png" alt="press_faznet">
+    </div>
+  </div>
+</div>
+
+<div class="main-head">
+  <div class="head-back" [ngClass]="{form: onStep == 0 || onStep == 2 , uplo: onStep == 1}">
+    <div class="head-back-bigo"></div>
+    <div class="head-tipo" *ngIf="myTick==undefined">
+      <h1 class="tipo-tito">Hallo! Einfach hochladen, wir kümmern uns.</h1>
+      <div class="tipo-cont">
+        <div class="tipo-what">
+          <button md-button (click)="onTipo('private')">
+            <md-icon class="icon1">person</md-icon>
+            PRIVATE
+            <span class="price">
+              <md-icon>euro_symbol</md-icon>
+              39,-
+            </span>
+          </button>
+          <div class="what-info"><md-icon>info</md-icon>mehr info</div>
+        </div>
+        <div class="tipo-what">
+          <button md-button (click)="onTipo('business')">
+            <md-icon class="icon1">location_city</md-icon>
+            BUSINESS
+            <span class="price">
+              <md-icon>euro_symbol</md-icon>
+              179,-
+            </span>
+          </button>
+          <div class="what-info"><md-icon>info</md-icon>mehr info</div>
+        </div>
+      </div>
+    </div>
+    <div class="head-uplo" *ngIf="myTick!=undefined">
+      <h1 class="head-tito">Hallo! Einfach hochladen, wir kümmern uns.</h1>
+      <div class="tabs-uplo">
+        <md-tab-group class="tabs-mode" selectedIndex={{onMode}} (selectChange)="onMODE($event.index)">
+          
+          <md-tab class="tabs-online">
+            <ng-template md-tab-label>
+              <div class="mode-labe">ONLINE</div>
+            </ng-template>
+            <md-tab-group class="tabs-step" [ngClass]="{
+                onstep1: onStep == 0, 
+                onstep2: onStep > 0, 
+                onstep3: onStep > 1, 
+                onstep4: onStep > 2
+              }" selectedIndex={{onStep}}>
+              <md-tab disabled>
+                <ng-template md-tab-label>
+                  <div class="labe-step step1">
+                    <div class="step-text">Kontaktinformationen</div>
+                    <div class="step-numb"><span>1</span><i class="material-icons">check</i></div>
+                    <div class="step-line2"></div>
+                  </div>
+                </ng-template>
+                <app-step1 #onlineStepFirst></app-step1>
+              </md-tab>
+
+              <md-tab disabled>
+                <ng-template md-tab-label>
+                  <div class="labe-step step2">
+                    <div class="step-text">Dokumente hochladen</div>
+                    <div class="step-numb"><span>2</span><i class="material-icons">check</i></div>
+                    <div class="step-line1"></div>
+                    <div class="step-line2"></div>
+                  </div>
+                </ng-template>
+                <app-step2onl #onlineStepSecond></app-step2onl>
+              </md-tab>
+
+              <md-tab disabled >
+                <ng-template md-tab-label>
+                  <div class="labe-step step3">
+                    <div class="step-text">Bezahlen</div>
+                    <div class="step-numb"><span>3</span><i class="material-icons">check</i></div>
+                    <div class="step-line"></div>
+                    <div class="step-line1"></div>
+                  </div>
+                </ng-template>
+                <app-step3 #onlineStepThird></app-step3>
+              </md-tab>
+            </md-tab-group>
+            <div class="step-acto">
+              <div class="acto-sure">
+                <i class="material-icons">lock</i>
+                <span>Sichere Übertragung Ihrer Daten</span>
+              </div>
+              <div class="acto-butt">
+
+                <span md-button class="butt-back" 
+                  *ngIf="onStep==0"
+                  (click)="goNew()">
+                  <i class="material-icons">keyboard_arrow_left</i>
+                  zuruck 
+                </span>              
+                <span md-button class="butt-back" 
+                  *ngIf="onStep>0"
+                  (click)="prevSTEP()">
+                  <i class="material-icons">keyboard_arrow_left</i>
+                  zuruck 
+                </span>              
+
+                <button md-button class="butt-acto" 
+                  *ngIf="onStep==0" 
+                  (click)="onlineStepFirst.onSubmit()">
+                  weiter
+                  <i class="material-icons">keyboard_arrow_right</i>
+                </button>
+                
+                <button md-button class="butt-acto" 
+                  *ngIf="onStep==1"
+                  (click)="onlineStepSecond.onSubmit()">
+                  weiter
+                  <i class="material-icons">keyboard_arrow_right</i>
+                </button>              
+
+                <button md-button class="butt-acto" 
+                  *ngIf="onStep==2"
+                  (click)="onlineStepThird.onSubmit()">
+                  zur Bezahlung
+                  <i class="material-icons">keyboard_arrow_right</i>
+                </button>
+
+
+              </div>
+            </div>
+          </md-tab>
+
+          <md-tab class="tabs-post">
+            <ng-template md-tab-label>
+              <div class="mode-labe">POST</div>
+            </ng-template>
+            <md-tab-group class="tabs-step" [ngClass]="{
+                onstep1: onStep == 0, 
+                onstep2: onStep > 0, 
+                onstep3: onStep > 1, 
+                onstep4: onStep > 2
+              }" selectedIndex={{onStep}}>
+              <md-tab disabled>
+                <ng-template md-tab-label>
+                  <div class="labe-step step1">
+                    <div class="step-text">Kontaktinformationen</div>
+                    <div class="step-numb"><span>1</span><i class="material-icons">check</i></div>
+                    <div class="step-line2"></div>
+                  </div>
+                </ng-template>
+                <app-step1 #postStepFirst></app-step1>
+              </md-tab>
+              <md-tab disabled>
+                <ng-template md-tab-label>
+                  <div class="labe-step step2">
+                    <div class="step-text">Abrechnung hochladen</div>
+                    <div class="step-numb"><span>2</span><i class="material-icons">check</i></div>
+                    <div class="step-line1"></div>
+                    <div class="step-line2"></div>
+                  </div>
+                </ng-template>
+                <!--<app-step2pos #postStepSecond></app-step2pos>-->
+              </md-tab>
+              <md-tab disabled>
+                <ng-template md-tab-label>
+                  <div class="labe-step step3">
+                    <div class="step-text">Abrechnung hochladen</div>
+                    <div class="step-numb"><span>3</span><i class="material-icons">check</i></div>
+                    <div class="step-line1"></div>
+                  </div>
+                </ng-template>
+                <!--<app-step3 #postStepThird></app-step3>-->
+              </md-tab>
+            </md-tab-group>
+            <div class="step-acto">
+              <div class="acto-sure">
+                <i class="material-icons">lock</i>
+                <span>Sichere Übertragung Ihrer Daten</span>
+              </div>
+              <div class="acto-butt">
+                <span md-button class="butt-back" (click)="prevSTEP()" *ngIf="onStep>0">
+                  <i class="material-icons">keyboard_arrow_left</i>
+                  zuruck 
+                </span>
+                <button md-button class="butt-acto" 
+                  *ngIf="onStep==0" 
+                  (click)="postStepFirst.onSubmit()">
+                  weiter
+                  <i class="material-icons">keyboard_arrow_right</i>
+                </button>
+                <button md-button class="butt-acto" 
+                  *ngIf="onStep==1"
+                  (click)="postStepSecond.onSubmit()">
+                  weiter
+                  <i class="material-icons">keyboard_arrow_right</i>
+                </button>
+                <button md-button class="butt-acto" 
+                  *ngIf="onStep==2"
+                  (click)="postStepThird.onSubmit()">
+                  zur Bezahlung
+                  <i class="material-icons">keyboard_arrow_right</i>
+                </button>
+              </div>
+            </div>
+          </md-tab>
+
+          <md-tab class="tabs-fax">
+            <ng-template md-tab-label>
+              <div class="mode-labe">FAX</div>
+            </ng-template>
+            <md-tab-group class="tabs-step" [ngClass]="{
+                onstep1: onStep == 0, 
+                onstep2: onStep > 0, 
+                onstep3: onStep > 1, 
+                onstep4: onStep > 2
+              }" selectedIndex={{onStep}}>
+              <md-tab disabled>
+                <ng-template md-tab-label>
+                  <div class="labe-step step1">
+                    <div class="step-text">Kontaktinformationen</div>
+                    <div class="step-numb"><span>1</span><i class="material-icons">check</i></div>
+                    <div class="step-line2"></div>
+                  </div>
+                </ng-template>
+                <app-step1 #faxStepFirst></app-step1>
+              </md-tab>
+              <md-tab disabled>
+                <ng-template md-tab-label>
+                  <div class="labe-step step2">
+                    <div class="step-text">Abrechnung hochladen</div>
+                    <div class="step-numb"><span>2</span><i class="material-icons">check</i></div>
+                    <div class="step-line1"></div>
+                    <div class="step-line2"></div>
+                  </div>
+                </ng-template>
+                <!--<app-step2fax #faxStepSecond></app-step2fax>-->
+              </md-tab>
+              <md-tab disabled>
+                <ng-template md-tab-label>
+                  <div class="labe-step step3">
+                    <div class="step-text">Abrechnung hochladen</div>
+                    <div class="step-numb"><span>3</span><i class="material-icons">check</i></div>
+                    <div class="step-line1"></div>
+                  </div>
+                </ng-template>
+                <!--<app-step3 #faxStepThird></app-step3>-->
+              </md-tab>
+            </md-tab-group>
+            <div class="step-acto">
+              <div class="acto-sure">
+                <i class="material-icons">lock</i>
+                <span>Sichere Übertragung Ihrer Daten</span>
+              </div>
+              <div class="acto-butt">
+                <span md-button class="butt-back" (click)="prevSTEP()" *ngIf="onStep>0 && onStep<3">
+                  <i class="material-icons">keyboard_arrow_left</i>
+                  zuruck 
+                </span>
+                <button md-button class="butt-acto" 
+                  *ngIf="onStep==0" 
+                  (click)="faxStepFirst.onSubmit()">
+                  weiter
+                  <i class="material-icons">keyboard_arrow_right</i>
+                </button>
+                <button md-button class="butt-acto" 
+                  *ngIf="onStep==1"
+                  (click)="faxStepSecond.onSubmit()">
+                  weiter
+                  <i class="material-icons">keyboard_arrow_right</i>
+                </button>
+                <button md-button class="butt-acto" 
+                  *ngIf="onStep==2"
+                  (click)="faxStepThird.onSubmit()">
+                  zur Bezahlung
+                  <i class="material-icons">keyboard_arrow_right</i>
+                </button>
+              </div>
+            </div>
+          </md-tab>
+
+        </md-tab-group>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="trust-logo">
+  <div class="trust_cont">
+    <img src="assets/trust_expert.png" alt="trust_expert">
+    <img src="assets/trust_norton.png" alt="trust_norton">
+    <img src="assets/trust_ssl.png" alt="trust_ssl">
+  </div>
+</div>
+
+<div class="sufot">
+    <div>© 2017 Mineko GmbH. Alle Rechte vorbehalten.</div>
+</div>
+</div>

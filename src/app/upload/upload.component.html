@@ -1,0 +1,133 @@
+<div class="upload">
+<div class="main-menu">
+  <div class="menu-cont">
+    <div class="menu-left">
+      <img routerLink="/" src="assets/logo_mineko.svg" alt="logo_mineko">
+      <button md-icon-button routerLink="/empirica"  mdTooltip="New Folder" mdTooltipPosition="right">
+        <md-icon>create_new_folder</md-icon>
+      </button>
+    </div>
+    <div class="menu-space"></div>
+    <div class="menu-right">
+      <span *ngIf="!imlogin">EMPIRICA-INSTITUT</span>
+      <button md-button [mdMenuTriggerFor]="appMenu" *ngIf="imlogin">
+        {{userlog}}
+      </button>
+      <md-menu #appMenu="mdMenu">
+        <button md-menu-item disabled>
+          <md-icon>person</md-icon>
+          Einstellungen
+        </button>
+        <button md-menu-item (click)="logOut()">
+          <md-icon>forward</md-icon>
+          Logout
+        </button>
+      </md-menu>
+    </div>
+  </div>
+</div>
+<div class="main-head" [class.verybig]="totafile>3">
+  <div class="tito-fold" *ngIf="foldername">{{foldername}}</div>
+  <md-tab-group dynamicHeight selectedIndex={{goTab}}>
+    <md-tab disabled>
+      <form class="main-log" [formGroup]="form">
+        <div class="main-field">
+          <md-icon class="icon-fiel">lock</md-icon>
+          <md-input-container>
+            <input mdInput formControlName="email" type="email" placeholder="E-Mail" email>
+              <md-hint *ngIf="(form.controls['email'].touched || submitted)">
+                <span *ngIf="form.controls['email'].invalid">Email is required</span>
+                <span *ngIf="error_email">E-Mail Adresse ist nicht korrekt</span>
+              </md-hint>
+          </md-input-container>
+          <div class="space"></div>
+          <md-input-container>
+            <input mdInput formControlName="password" type="password" placeholder="Passwort">
+              <md-hint *ngIf="(form.controls['password'].touched || submitted)">
+                <span *ngIf="form.controls['password'].invalid">Password is required</span>
+                <span *ngIf="error_password">Passwort ist nicht korrekt</span>
+              </md-hint>
+          </md-input-container>
+          <button md-button class="butt-acto"  (click)="onLogin()">
+            WEITER <md-icon>keyboard_arrow_right</md-icon>
+          </button>
+        </div>
+      </form>
+    </md-tab>
+    <md-tab disabled>
+      <div class="sele-fold">
+        <md-icon class="fold-icon">folder</md-icon>
+        <md-input-container class="fold-inpu">
+          <input mdInput placeholder="Wählen Sie den Ordner aus" [mdAutocomplete]="folder" [formControl]="folderCtrl">
+          <md-hint *ngIf="nofolder">Einen Ordner auswählen oder erstellen</md-hint>
+        </md-input-container>
+        <md-autocomplete #folder="mdAutocomplete" panelOpen="nofolder=false">
+          <md-option *ngFor="let folder of filteredFolders | async" [value]="folder | slice:12">
+            {{folder | slice:12}}
+          </md-option>
+        </md-autocomplete>
+        <button md-button class="butt-acto" (click)="goFold()">
+          WEITER <md-icon>keyboard_arrow_right</md-icon>
+        </button>
+      </div>
+    </md-tab>
+    <md-tab disabled>
+      <div class="uplo-cont">
+        <label class="boxo-uplo" 
+          ondragover="return false;" 
+          [class.borderColor]="dragging" 
+          (dragenter)="handleDragEnter()" (dragleave)="handleDragLeave()" 
+          (drop)="handleDrop($event)">
+          <div class="drag-pros">Hier Dateien reinziehen (Drag & Drop)</div>
+          <button md-button class="acto-sele">
+            <span>Dateien auswählen</span> 
+            <input type="file" multiple name="file" accept="image/*|pdf" (change)="handleInputChange($event)">
+          </button>
+        </label>
+        <div class="tabo-uplo" *ngIf="inFile">
+          <div class="" *ngFor="let file of files">
+            <md-list class="field-cont" *ngIf="!file.hide">
+              <md-list-item>
+                <md-icon md-list-icon (click)="myFILE(file)" class="icon-file">insert_drive_file</md-icon>
+                <h4 md-line (click)="myFILE(file)">{{file.name}}</h4>
+                <button md-icon-button 
+                *ngIf="!file.load" 
+                mdTooltip="Delete File" mdTooltipPosition="left"
+                (click)="fileDelete(file)"
+                class="icon-dele">
+                  <md-icon>delete</md-icon>
+              </button>
+            </md-list-item>
+            <md-divider></md-divider>
+            <md-progress-bar mode="indeterminate" *ngIf="file.load"></md-progress-bar>
+          </md-list>
+          </div>
+          <div class="foo-file">
+            <span class="file-tota">Gesamtdateien : {{totafile}}</span>
+            <!--<button md-button (click)="deleAll()">Delete All</button>-->
+              <button md-icon-button 
+              mdTooltip="Delete All" mdTooltipPosition="right"
+              (click)="delFold()">
+                <md-icon>delete_sweep</md-icon>
+            </button>
+            
+          </div>
+        </div>
+      </div>
+    </md-tab>
+  </md-tab-group>
+</div>
+
+<div class="footer">
+  <div class="trust-logo">
+    <div class="trust_cont">
+      <img src="assets/trust_expert.png" alt="trust_expert">
+      <img src="assets/trust_norton.png" alt="trust_norton">
+      <img src="assets/trust_ssl.png" alt="trust_ssl">
+    </div>
+  </div>
+  <div class="sufot">
+      <span>© 2017 Mineko GmbH. Alle Rechte vorbehalten.</span>
+  </div>
+</div>
+</div>

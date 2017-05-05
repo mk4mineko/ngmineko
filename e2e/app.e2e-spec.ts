@@ -1,6 +1,6 @@
 import { AaaPage } from './app.po';
 
-describe('aaa App', () => {
+describe('ngmineko App', () => {
   let page: AaaPage;
 
   beforeEach(() => {
